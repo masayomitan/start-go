@@ -8,5 +8,6 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gofiber/fiber/v2 v2.12.0
 	github.com/klauspost/compress v1.13.0 // indirect
+	github.com/stretchr/testify v1.7.0
 	golang.org/x/sys v0.0.0-20210603125802-9665404d3644 // indirect
 )

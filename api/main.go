@@ -10,7 +10,7 @@ func main() {
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World 👋!")
+		return c.SendString("Hello, World !")
 	})
 
 	db, err := sql.Open("mysql", "root:@/start_go")
@@ -19,12 +19,13 @@ func main() {
   }
   defer db.Close() // 関数がリターンする直前に呼び出される
 
-  rows, err := db.Query("SELECT * FROM users") // 
+	// users, err := db.Query("SELECT * FROM users") // 
+	todos, err := db.Query("SELECT * FROM todos") // 
   if err != nil {
     panic(err.Error())
   }
 
-  columns, err := rows.Columns() // カラム名を取得
+	columns, err := todos.Columns() // カラム名を取得
   if err != nil {
     panic(err.Error())
   }
@@ -38,13 +39,14 @@ func main() {
     scanArgs[i] = &values[i]
   }
 
-  for rows.Next() {
-    err = rows.Scan(scanArgs...)
+  for todos.Next() {
+    err = todos.Scan(scanArgs...)
     if err != nil {
       panic(err.Error())
     }
 
-    var value string
+		var value string
+		
     for i, col := range values {
       // Here we can check if the value is nil (NULL value)
       if col == nil {
