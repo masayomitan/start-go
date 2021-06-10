@@ -9,14 +9,14 @@ type todoUsecase struct {
 }
 
 func NewTodoUsecase( tr domain.TodoRepository ) domain.TodoUsecase {
-	return todoUsecase {
+	return &todoUsecase {
 		todoRepo: tr,
 	}
 }
 
 func (t * todoUsecase ) AllGet() ([]domain.Todo, error ){
 	todos, err := t.todoRepo.AllGet()
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	return todos, nil

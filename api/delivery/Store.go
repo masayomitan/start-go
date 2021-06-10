@@ -25,12 +25,12 @@ func (h * todoStoreHandler ) Store( c * fiber.Ctx ) error {
 			"message": "エラーってるよ〜",
 		})
 	}
-	err = h.todoUsecase.Store( *todo )
+	err = h.todoUseCase.Store( * todo )
 	if err != nil {
-		c.Store( 500 )
+		c.Status( 500 )
 		return c.JSON( fiber.Map {
 			"message": "サーバーがおかしいよ〜",
 		})
-		return c.JSON( "Store OK" )
 	}
+	return c.JSON( "Store OK" )
 }
