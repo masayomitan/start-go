@@ -1,18 +1,28 @@
 package main
 
 import (
-    "github.com/gofiber/fiber/v2"
+		"github.com/gofiber/fiber/v2"
+		_ "github.com/go-sql-driver/mysql"
 		"database/sql"
 		"fmt"
 		"todo/delivery"
 		"todo/repository"
 		"todo/usecase"
-		"github.com/go-sql-driver/mysql"
+		
+		
 )
 func main() {
 	app := fiber.New()
 	tr := repository.NewSyncMapTodoRepository()
 	tu := usecase.NewTodoUsecase(tr)
+  // app.Use(cors.New(cors.Config{
+	// 	AllowCredentials: true,
+	// }))
+
+	delivery.NewTodoAllGetHandler(app, tu)
+	delivery.NewTodoDeleteHandler(app, tu)
+	delivery.NewTodoStatusUpdateHandler(app, tu)
+	delivery.NewTodoStoreHandler(app, tu)
 
 
 	app.Get("/", func(c *fiber.Ctx) error {

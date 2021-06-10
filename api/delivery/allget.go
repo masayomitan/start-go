@@ -7,7 +7,8 @@ import(
 )
 
 type todoAllGetHandler struct {
-    todoUseCase domain.TodoUseCase
+		todoUseCase domain.TodoUsecase
+		
 }
 
 func NewTodoAllGetHandler(c *fiber.App, th domain.TodoUsecase) {
@@ -28,4 +29,4 @@ func (h *todoAllGetHandler) AllGet(c *fiber.Ctx) error {
 		})
 	}
 	return c.JSON(todos)
-}c
+}
