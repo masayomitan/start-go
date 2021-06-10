@@ -1,13 +1,19 @@
 package main
 
-import ("github.com/gofiber/fiber/v2"
-				"database/sql"
-				"fmt"
-			
-_       "github.com/go-sql-driver/mysql"
+import (
+    "github.com/gofiber/fiber/v2"
+		"database/sql"
+		"fmt"
+		"todo/delivery"
+		"todo/repository"
+		"todo/usecase"
+		"github.com/go-sql-driver/mysql"
 )
 func main() {
 	app := fiber.New()
+	tr := repository.NewSyncMapTodoRepository()
+	tu := usecase.NewTodoUsecase(tr)
+
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World !")
