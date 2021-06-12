@@ -26,7 +26,7 @@ func main() {
 
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World !")
+		return c.SendString("/ui/index.html")
 	})
 
 	db, err := sql.Open("mysql", "root:@/start_go")
