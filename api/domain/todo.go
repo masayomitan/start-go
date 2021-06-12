@@ -8,15 +8,18 @@ type Todo struct {
 }
 
 type TodoUsecase interface {
-	AllGet() ([]Todo, error)
-	StatusUpdate(id int) error
-	Store(todo Todo) error
-	Delete(id int) error
+		AllGet() ([]Todo, error)
+		StatusUpdate(id int) error
+		Store(todo Todo) error
+		Delete(id int) error
+		Search(key string) ([] Todo, error )
 }
 
 type TodoRepository interface {
-	AllGet() ([]Todo, error)
-	StatusUpdate(id int) error
-	Store(todo Todo) error
-	Delete(id int) error
+		AllGet() ([]Todo, error)
+		StatusUpdate(id int) error
+		Store(todo Todo) error
+		Delete(id int) error
+		Search(key string) ([] Todo, error )
 }
+

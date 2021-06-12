@@ -4,7 +4,7 @@ const todosUL = document.getElementById('todos')
 
 // baseURL
 const baseURL = 'http://localhost/'
-
+console.log(baseUrl);
 // サーバーからデータを取得
 let todos
 getAllTodo()
