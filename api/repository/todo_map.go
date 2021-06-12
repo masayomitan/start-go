@@ -1,8 +1,10 @@
 package repository
 
 import(
-    "errors"
-    "sync"
+		"errors"
+		// "fmt"
+		"sync"
+		"strings"
     "todo/domain"
 )
 
@@ -57,3 +59,22 @@ func (t *todoRepository) Delete(id int) error {
 	t.m.Delete(id)
 	return nil
 }
+
+func (t * todoRepository ) Search (key string ) ([]domain.Todo, error) {
+		var todos []domain.Todo
+
+		t.m.Range( func (_ interface{}, value interface{}) bool {
+				todo := value.( domain.Todo )
+				NORESULT := -1
+				searchResult := strings.Index( todo.Text, key )
+				if searchResult != NORESULT {
+						todos = append(
+								todos,
+								todo,
+						)
+				}
+				return true
+		})
+		return todos, nil
+}
+
