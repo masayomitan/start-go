@@ -2,7 +2,6 @@ package repository
 
 import(
 		"errors"
-		// "fmt"
 		"sync"
 		"strings"
     "todo/domain"
@@ -60,7 +59,7 @@ func (t *todoRepository) Delete(id int) error {
 	return nil
 }
 
-func (t * todoRepository ) Search (key string ) ([]domain.Todo, error) {
+func (t * todoRepository ) Search ( key string ) ( []domain.Todo, error ) {
 		var todos []domain.Todo
 
 		t.m.Range( func (_ interface{}, value interface{}) bool {
@@ -77,4 +76,3 @@ func (t * todoRepository ) Search (key string ) ([]domain.Todo, error) {
 		})
 		return todos, nil
 }
-

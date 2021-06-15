@@ -15,17 +15,22 @@ func main() {
 	app := fiber.New()
 	tr := repository.NewSyncMapTodoRepository()
 	tu := usecase.NewTodoUsecase(tr)
+	port := "80"
   // app.Use(cors.New(cors.Config{
 	// 	AllowCredentials: true,
 	// }))
-
+	
 	delivery.NewTodoAllGetHandler(app, tu)
 	delivery.NewTodoDeleteHandler(app, tu)
 	delivery.NewTodoStatusUpdateHandler(app, tu)
 	delivery.NewTodoStoreHandler(app, tu)
+	delivery.NewTodoSearchHandler(app, tu)
 
 
 	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World !")
+	})
+	app.Get("/todo", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World !")
 	})
 
