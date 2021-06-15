@@ -12,7 +12,7 @@ type TodoUsecase interface {
 		StatusUpdate(id int) error
 		Store(todo Todo) error
 		Delete(id int) error
-		Search(key string) ([] Todo, error )
+		Search(key string) ([]Todo, error) // 追加
 }
 
 type TodoRepository interface {
@@ -20,6 +20,5 @@ type TodoRepository interface {
 		StatusUpdate(id int) error
 		Store(todo Todo) error
 		Delete(id int) error
-		Search(key string) ([] Todo, error )
+		Search(key string) ([]Todo, error) // 追加
 }
-
