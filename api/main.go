@@ -8,6 +8,7 @@ import (
 		"todo/delivery"
 		"todo/repository"
 		"todo/usecase"
+		"github.com/gin-contrib/cors"
 		
 		
 )
@@ -15,10 +16,11 @@ func main() {
 	app := fiber.New()
 	tr := repository.NewSyncMapTodoRepository()
 	tu := usecase.NewTodoUsecase(tr)
-	port := "80"
-  // app.Use(cors.New(cors.Config{
-	// 	AllowCredentials: true,
-	// }))
+// CORSの設定
+	app.Use(cors.New(cors.Config{
+		// https://docs.gofiber.io/api/middleware/cors#config
+		AllowCredentials: true,
+	}))
 	
 	delivery.NewTodoAllGetHandler(app, tu)
 	delivery.NewTodoDeleteHandler(app, tu)
