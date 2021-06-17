@@ -8,6 +8,7 @@ require (
 	github.com/cosmtrek/air v1.27.3
 	github.com/creack/pty v1.1.13 // indirect
 	github.com/fatih/color v1.12.0 // indirect
+	github.com/gin-contrib/cors v1.3.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gofiber/fiber/v2 v2.12.0
 	github.com/klauspost/compress v1.13.0 // indirect

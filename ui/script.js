@@ -3,7 +3,7 @@ const input = document.getElementById('input')
 const todosUL = document.getElementById('todos')
 
 // baseURL
-const baseURL = 'http://localhost/'
+const baseURL = 'http://localhost/todos'
 console.log(baseUrl);
 // サーバーからデータを取得
 let todos

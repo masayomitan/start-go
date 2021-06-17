@@ -2,7 +2,6 @@ package delivery
 
 import(
 	"todo/domain"
-
 	"github.com/gofiber/fiber/v2"
 )
 

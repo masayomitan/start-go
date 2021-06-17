@@ -8,33 +8,44 @@ import (
 		"todo/delivery"
 		"todo/repository"
 		"todo/usecase"
-		"github.com/gin-contrib/cors"
+		// "github.com/gin-contrib/cors"
+		"net/http"
+		"text/template"
 		
 		
 )
+
+func mainHandler(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("index.html")
+	if err != nil {
+		panic(err.Error())
+	}
+	if err := t.Execute(w, nil); err != nil {
+		panic(err.Error())
+	}
+}
+
 func main() {
 	app := fiber.New()
 	tr := repository.NewSyncMapTodoRepository()
 	tu := usecase.NewTodoUsecase(tr)
-// CORSの設定
-	app.Use(cors.New(cors.Config{
-		// https://docs.gofiber.io/api/middleware/cors#config
-		AllowCredentials: true,
-	}))
 	
-	delivery.NewTodoAllGetHandler(app, tu)
-	delivery.NewTodoDeleteHandler(app, tu)
-	delivery.NewTodoStatusUpdateHandler(app, tu)
-	delivery.NewTodoStoreHandler(app, tu)
-	delivery.NewTodoSearchHandler(app, tu)
+	// CORSの設定
+	// app.Use(cors.New(cors.Config{
+	// 	// https://docs.gofiber.io/api/middleware/cors#config
+	// 	AllowCredentials: true,
+	// }))
+		
+		delivery.NewTodoAllGetHandler(app, tu)
+		delivery.NewTodoDeleteHandler(app, tu)
+		delivery.NewTodoStatusUpdateHandler(app, tu)
+		delivery.NewTodoStoreHandler(app, tu)
+		delivery.NewTodoSearchHandler(app, tu)
 
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World !")
-	})
-	app.Get("/todo", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World !")
-	})
+		http.HandleFunc("/", mainHandler)
+		http.ListenAndServe(":8000", nil)
+		
 
 	db, err := sql.Open("mysql", "root:@/start_go")
   if err != nil {
@@ -55,8 +66,6 @@ func main() {
 
   values := make([]sql.RawBytes, len(columns))
 
-  //  rows.Scan は引数に `[]interface{}`が必要.
-
   scanArgs := make([]interface{}, len(values))
   for i := range values {
     scanArgs[i] = &values[i]
@@ -71,7 +80,6 @@ func main() {
 		var value string
 		
     for i, col := range values {
-      // Here we can check if the value is nil (NULL value)
       if col == nil {
         value = "NULL"
       } else {
