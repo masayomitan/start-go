@@ -81,7 +81,7 @@ func main() {
 		
     for i, col := range values {
       if col == nil {
-        value = "NULL"
+        value = "NULL" 
       } else {
         value = string(col)
       }
