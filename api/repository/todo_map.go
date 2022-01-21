@@ -7,8 +7,7 @@ import(
     "todo/domain"
 )
 
-type todoRepository struct
-{
+type todoRepository struct {
     m sync.Map
 }
 

@@ -14,7 +14,7 @@ func NewTodoUsecase( tr domain.TodoRepository ) domain.TodoUsecase {
 	}
 }
 
-func (t * todoUsecase ) AllGet() ([]domain.Todo, error ){
+func (t * todoUsecase) AllGet() ([]domain.Todo, error ){
 	todos, err := t.todoRepo.AllGet()
 	if err != nil {
 		return nil, err
